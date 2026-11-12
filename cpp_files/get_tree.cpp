@@ -82,43 +82,19 @@ error_t fill_tree_structure(struct tree_node_t* current_node, struct tree_t* tre
     size_t temp_increment = 0;
     if (tree_buffer[*buffer_position] == '(')
     {
-        tree_node_t* node_pointer = (tree_node_t*)calloc(1, sizeof(tree_node_t));
-        if (node_pointer == NULL)
+        tree_node_t* node_pointer = 0;
+        error_status = create_one_node(&node_pointer);
+        if (error_status)
         {
             FILL_DBG(error_status);
-            return NULL_POINT_FROM_CALLOC;
-        }
-
-        node_pointer -> data = (char*)calloc(MAX_NODE_LEN, sizeof(char));
-        if (node_pointer -> data == NULL)
-        {
-            FILL_DBG(error_status);
-            return NULL_POINT_FROM_CALLOC;
+            return error_status;
         }
         tree -> tree_node_num++;
 
         sscanf(tree_buffer + *buffer_position + 2, "%[^\"]%n", node_pointer -> data, &temp_increment);
         *buffer_position += 4 + temp_increment;
 
-        if (tree -> tree_root == NULL)
-        {
-            tree -> tree_root = node_pointer;
-            (tree -> tree_root) -> parent_node = NULL;
-        }
-
-        else
-        {
-            if (current_node -> left_node == NULL)
-            {
-                current_node -> left_node = node_pointer;
-                (current_node -> left_node) -> parent_node = current_node;
-            }
-            else
-            {
-                current_node -> right_node = node_pointer;
-                (current_node -> right_node) -> parent_node = current_node;
-            }
-        }
+        link_nodes(tree, node_pointer, current_node);
 
         error_status = fill_tree_structure(node_pointer, tree, tree_buffer, buffer_position);
         if (error_status)
@@ -197,46 +173,25 @@ error_t create_tree_root(struct tree_t* tree)
         return NULL_POINT_ON_TREE_STRUCT;
     }
 
-    tree -> tree_root = (tree_node_t*)calloc(1, sizeof(tree_node_t));
-    if (tree -> tree_root == NULL)
+    error_status = create_one_node(&(tree -> tree_root));
+    if (error_status)
     {
         FILL_DBG(error_status);
-        return NULL_POINT_FROM_CALLOC;
+        return error_status;
     }
 
-    (tree -> tree_root) -> data = (char*)calloc(MAX_NODE_LEN, sizeof(char));
-    if ((tree -> tree_root) -> data == NULL)
+    error_status = create_one_node(&((tree -> tree_root) -> left_node));
+    if (error_status)
     {
         FILL_DBG(error_status);
-        return NULL_POINT_FROM_CALLOC;
+        return error_status;
     }
 
-    (tree -> tree_root) -> left_node = (tree_node_t*)calloc(1, sizeof(tree_node_t));
-    if ((tree -> tree_root) -> left_node == NULL)
+    error_status = create_one_node(&((tree -> tree_root) -> right_node));
+    if (error_status)
     {
         FILL_DBG(error_status);
-        return NULL_POINT_FROM_CALLOC;
-    }
-
-    ((tree -> tree_root) -> left_node) -> data = (char*)calloc(MAX_NODE_LEN, sizeof(char));
-    if (((tree -> tree_root) -> left_node) -> data == NULL)
-    {
-        FILL_DBG(error_status);
-        return NULL_POINT_FROM_CALLOC;
-    }
-
-    (tree -> tree_root) -> right_node = (tree_node_t*)calloc(1, sizeof(tree_node_t));
-    if ((tree -> tree_root) -> right_node == NULL)
-    {
-        FILL_DBG(error_status);
-        return NULL_POINT_FROM_CALLOC;
-    }
-
-    ((tree -> tree_root) -> right_node) -> data = (char*)calloc(MAX_NODE_LEN, sizeof(char));
-    if (((tree -> tree_root) -> right_node) -> data == NULL)
-    {
-        FILL_DBG(error_status);
-        return NULL_POINT_FROM_CALLOC;
+        return error_status;
     }
 
     printf("Enter the main characteristic: ");
@@ -261,3 +216,37 @@ int no_or_empty_file_created(const char* file_name)
     else return 0;
 }
 
+error_t create_one_node(struct tree_node_t** node_to_create)
+{
+    *node_to_create = (tree_node_t*)calloc(1, sizeof(tree_node_t));
+    if (*node_to_create == NULL)
+        return NULL_POINT_FROM_CALLOC;
+
+    (*node_to_create) -> data = (char*)calloc(MAX_NODE_LEN, sizeof(char));
+    if ((*node_to_create) -> data == NULL)
+        return NULL_POINT_FROM_CALLOC;
+
+    return OK;
+}
+
+void link_nodes(struct tree_t* tree, struct tree_node_t* node_pointer, struct tree_node_t* current_node)
+{
+    if (tree -> tree_root == NULL)
+    {
+        tree -> tree_root = node_pointer;
+        (tree -> tree_root) -> parent_node = NULL;
+    }
+    else
+    {
+        if (current_node -> left_node == NULL)
+        {
+            current_node -> left_node = node_pointer;
+            (current_node -> left_node) -> parent_node = current_node;
+        }
+        else
+        {
+            current_node -> right_node = node_pointer;
+            (current_node -> right_node) -> parent_node = current_node;
+        }
+    }
+}
