@@ -42,14 +42,14 @@ error_t move_along_tree(struct tree_node_t** current_node)
     while (((*current_node) -> right_node != NULL) && ((*current_node) -> left_node != NULL))
     {
         char answer[5] = {};
-        printf("Is it %" SPECIFICATOR "?\n" , (*current_node) -> data);
+        printf("Это %" SPECIFICATOR "?\n" , (*current_node) -> data);
         scanf("%s", answer);
         if (strcmp(answer, "yes") == 0)
             *current_node = (*current_node) -> right_node;
         else if (strcmp(answer, "no") == 0)
             *current_node = (*current_node) -> left_node;
         else
-            printf("No such option to answer");
+            printf("Такого варианта ответа нет\n");
     }
 
     return error_status;
@@ -62,12 +62,12 @@ error_t check_if_guessed(struct tree_node_t* current_node, struct tree_t* tree)
     char answer[5] = {};
     printf("Is it %" SPECIFICATOR "?\n", current_node -> data);
     scanf("%s", answer);
-    if (strcmp(answer, "yes") == 0)
+    if (strcmp(answer, "да") == 0)
     {
-        printf("Heheheh, I told you that I'll guess\n");
+        printf("Уафхфхфххф, я же говорил, что угадаю\n");
         return error_status;
     }
-    else if (strcmp(answer, "no") == 0)
+    else if (strcmp(answer, "нет") == 0)
     {
         tree -> tree_node_num += 2;
         current_node -> left_node = (tree_node_t*)calloc(1, sizeof(tree_node_t));
@@ -101,11 +101,11 @@ error_t check_if_guessed(struct tree_node_t* current_node, struct tree_t* tree)
 
         memcpy((current_node -> left_node) -> data, current_node -> data, MAX_NODE_LEN * sizeof(char));
 
-        printf("So what was it?: ");
-        scanf("%s", (current_node -> right_node) -> data);
+        printf("<Блиннн. Тогда что это было?: \n");
+        scanf("\n%[^\n]", (current_node -> right_node) -> data);
 
-        printf("How does %s differ from %s?: ", (current_node -> right_node) -> data, (current_node -> left_node) -> data);
-        scanf("%s", current_node -> data);
+        printf("Как %s отличается от %s?: \n", (current_node -> right_node) -> data, (current_node -> left_node) -> data);
+        scanf("\n%[^\n]", current_node -> data);
     }
 
     return error_status;

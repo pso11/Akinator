@@ -57,7 +57,7 @@ struct tree_t
     error_t node_veryficator(tree_node_t* current_node, size_t* visited_nodes, struct tree_t* tree);
     error_t tree_veryficator(struct tree_t* tree);
     void fprintf_edge(FILE* file, struct tree_node_t* current_node, struct tree_node_t* linked_node,
-                      const char* line_status, const char* edge_color, double penwidth);
+                      const char* line_status, const char* edge_color, double penwidth, const char* label);
     void fprintf_node(FILE* file, struct tree_node_t* current_node, const char* label_color,
                       const char* stroke_color, const char* fill_color);
 
@@ -111,5 +111,4 @@ struct tree_t
 error_t tree_init(struct tree_t* tree);
 error_t tree_destroy(struct tree_t* tree, struct tree_node_t* current_node);
 size_t ask_user_mode(void);
-
 

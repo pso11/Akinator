@@ -26,9 +26,6 @@ error_t tree_veryficator(struct tree_t* tree)
         return WRONG_SIZE;
     }
 
-    if ((tree -> tree_root != NULL) && ((tree -> tree_root) -> parent_node != NULL))
-        return WRONG_ROOT_PARENT;
-
     size_t visited_nodes = 0;
     error_status = node_veryficator(tree -> tree_root, &visited_nodes, tree);
     if (error_status)
@@ -127,6 +124,7 @@ void fprintf_error_inf(const struct tree_t* tree, FILE* file)
     {
         "Everything is OK",
         "Calloc didn't work",
+        "You gave NULL pointer on tree structure",
         "You gave not existing node to the function",
         "You gave NULL pointer on file to function",
         "Couldn't open file",
@@ -160,7 +158,8 @@ error_t node_veryficator(tree_node_t* current_node, size_t* visited_nodes, struc
 {
     error_t error_status = OK;
 
-    if (++(*visited_nodes) > (tree -> tree_node_num))
+    ++(*visited_nodes);
+    if ((*visited_nodes) > (tree -> tree_node_num))
         return TREE_WITH_CYCLE;
 
     if ((current_node -> right_node == NULL) != (current_node -> left_node == NULL))
@@ -203,9 +202,10 @@ void fprintf_node(FILE* file, struct tree_node_t* current_node, const char* labe
 }
 
 void fprintf_edge(FILE* file, struct tree_node_t* current_node, struct tree_node_t* linked_node,
-                  const char* line_status, const char* edge_color, double penwidth)
+                  const char* line_status, const char* edge_color, double penwidth, const char* label)
 {
-    fprintf(file,  "   \"%p\" -> \"%p\" [%s, color = \"%s\", penwidth = %lg];\n", current_node, linked_node, line_status, edge_color, penwidth);
+    fprintf(file,  "   \"%p\" -> \"%p\" [%s, color = \"%s\", penwidth = %lg, label = \"%s\"];\n",
+                    current_node, linked_node, line_status, edge_color, penwidth, label);
 }
 
 void fprintf_invis_edges(FILE* file, const struct tree_t* tree, tree_node_t* current_node, size_t* depth)
@@ -235,13 +235,13 @@ void fprintf_nodes(FILE* file, size_t* visited_nodes, tree_node_t* current_node)
 
     if (current_node -> right_node)
     {
-        fprintf_edge(file, current_node, current_node -> right_node, "dir = both", "#55c3dc", 1.0);
+        fprintf_edge(file, current_node, current_node -> right_node, "dir = both", "#55c3dc", 1.0, "yes");
         fprintf_nodes(file, visited_nodes, current_node -> right_node);
     }
 
     if (current_node -> left_node)
     {
-        fprintf_edge(file, current_node, current_node -> left_node, "dir = both", "#93c63a", 1.0);
+        fprintf_edge(file, current_node, current_node -> left_node, "dir = both", "#93c63a", 1.0, "no");
         fprintf_nodes(file, visited_nodes, current_node -> left_node);
     }
 

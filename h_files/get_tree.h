@@ -12,4 +12,5 @@ int no_or_empty_file_created(const char* file_name);
 error_t create_one_node(struct tree_node_t** node_to_create);
 void link_nodes(struct tree_t* tree, struct tree_node_t* node_pointer, struct tree_node_t* current_node);
 
+
 #define MAX_NODE_LEN 50

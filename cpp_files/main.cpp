@@ -1,6 +1,7 @@
 #include <TXLib.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
 
 #include "akinator.h"
 #include "error_codes.h"
@@ -15,6 +16,9 @@ error_t (*mode_array[])(struct tree_t* tree) =
 
 int main(const int argc, const char* argv[])
 {
+    SetConsoleCP(CP_UTF8);
+    SetConsoleOutputCP(CP_UTF8);
+
     error_t error_status = OK;
     struct tree_t tree = {};
     DUMP_INIT(tree);

@@ -1,1 +1,0 @@
- ("teacher"  ("ded"  ("mama"  nil nil) ("ded"  nil nil)) ("matan"  ("ded"  nil nil) ("shmidt"  nil nil)))

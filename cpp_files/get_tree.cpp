@@ -21,7 +21,7 @@ error_t get_tree(const char* file_name, struct tree_t* tree)
     {
         FILE* file = fopen(file_name, "w+");
         fclose(file);
-        printf("Your database doesn't exist.\n");
+        printf("Ваша база данных.\n");
         error_status = create_tree_root(tree);
         if (error_status)
         {
@@ -48,6 +48,8 @@ error_t get_tree(const char* file_name, struct tree_t* tree)
     }
 
     free(tree_buffer);
+
+    TREE_VERYFICATION(tree);
 
     return error_status;
 }
@@ -179,6 +181,7 @@ error_t create_tree_root(struct tree_t* tree)
         FILL_DBG(error_status);
         return error_status;
     }
+    (tree -> tree_root) -> parent_node = NULL;
 
     error_status = create_one_node(&((tree -> tree_root) -> left_node));
     if (error_status)
@@ -186,6 +189,7 @@ error_t create_tree_root(struct tree_t* tree)
         FILL_DBG(error_status);
         return error_status;
     }
+    ((tree -> tree_root) -> left_node) -> parent_node = tree -> tree_root;
 
     error_status = create_one_node(&((tree -> tree_root) -> right_node));
     if (error_status)
@@ -193,15 +197,17 @@ error_t create_tree_root(struct tree_t* tree)
         FILL_DBG(error_status);
         return error_status;
     }
+    ((tree -> tree_root) -> right_node) -> parent_node = tree -> tree_root;
+    tree -> tree_node_num +=
 
-    printf("Enter the main characteristic: ");
-    scanf("%s", ((tree -> tree_root) -> data));
+    printf("Введите главную характеристику: ");
+    scanf("\n%[^\n]", ((tree -> tree_root) -> data));
 
-    printf("Now enter the answer if yes: ");
-    scanf("%" SPECIFICATOR, (((tree -> tree_root) -> right_node)-> data));
+    printf("Теперь введите ответ, если да: ");
+    scanf("\n%[^\n]", (((tree -> tree_root) -> right_node)-> data));
 
-    printf("And the answer if no: ");
-    scanf("%" SPECIFICATOR, (((tree -> tree_root) -> left_node)-> data));
+    printf("И введите ответ, если нет: ");
+    scanf("\n%[^\n]", (((tree -> tree_root) -> left_node)-> data));
 
     return error_status;
 }
@@ -250,3 +256,4 @@ void link_nodes(struct tree_t* tree, struct tree_node_t* node_pointer, struct tr
         }
     }
 }
+
