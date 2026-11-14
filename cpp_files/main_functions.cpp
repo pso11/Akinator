@@ -64,9 +64,9 @@ error_t tree_destroy(struct tree_t* tree, struct tree_node_t* current_node)
 
 size_t ask_user_mode(void)
 {
-    printf("Привет, я Сири. Выберите режим работы программы \n"
-           "(1). Guess              (2). Show tree          \n"
-           "(3). Stop                                       \n");
+    printf("Привет, я Сири. Выберите режим работы программы   \n"
+           "(1). Отгадывание              (2). Показать дерево\n"
+           "(3). Выйти                                        \n");
 
     size_t chosen_mode = 0;
     scanf("%d", &chosen_mode);

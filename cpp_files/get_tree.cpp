@@ -21,7 +21,7 @@ error_t get_tree(const char* file_name, struct tree_t* tree)
     {
         FILE* file = fopen(file_name, "w+");
         fclose(file);
-        printf("Ваша база данных.\n");
+        printf("Ваша база данных пуста.\n");
         error_status = create_tree_root(tree);
         if (error_status)
         {

@@ -70,6 +70,7 @@ struct tree_t
 
     #define MAX_PATH_LEN 100
     #define MAX_FILE_NAME_LEN 15
+    #define MAX_ANSWER_NAME 25
 
     #define FILL_DBG(error)                \
         tree -> line       = __LINE__ ;    \

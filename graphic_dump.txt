@@ -1,12 +1,11 @@
 digraph tree
 {
-"011BBB80" -> "011BBC58"  [style = invis, weight = 1000, rank = 1];"011BBB80" -> "011BBB08"  [style = invis, weight = 1000, rank = 2];"011BBB08" -> "011BBCB8"  [style = invis, weight = 1000, rank = 3];"011BBB08" -> "011BBBE0"  [style = invis, weight = 1000, rank = 4];node [shape = doubleoctagon, fontsize = 28, fontname = "Helvetica-Bold", style = "bold", style = filled, fontcolor = "#FFFF00", fillcolor = "#ff0000"]   "011BBB80" [style = filled, fontcolor = "#000000", fillcolor = "#bce1ed", color = "#000000", shape = Mrecord, label = " {data = teacher | {left_node = 011BBC58 | right_node = 011BBC58} | {node = 011BBB80 | parent_node =  00000000}} "];
-   "011BBB80" -> "011BBB08" [dir = both, color = "#55c3dc", penwidth = 1, label = "yes"];
-   "011BBB08" [style = filled, fontcolor = "#000000", fillcolor = "#bce1ed", color = "#000000", shape = Mrecord, label = " {data = vedet matan | {left_node = 011BBCB8 | right_node = 011BBCB8} | {node = 011BBB08 | parent_node =  011BBB80}} "];
-   "011BBB08" -> "011BBBE0" [dir = both, color = "#55c3dc", penwidth = 1, label = "yes"];
-   "011BBBE0" [style = filled, fontcolor = "#000000", fillcolor = "#bce1ed", color = "#000000", shape = Mrecord, label = " {data = shmidt | {left_node = 00000000 | right_node = 00000000} | {node = 011BBBE0 | parent_node =  011BBB08}} "];
-   "011BBB08" -> "011BBCB8" [dir = both, color = "#93c63a", penwidth = 1, label = "no"];
-   "011BBCB8" [style = filled, fontcolor = "#000000", fillcolor = "#bce1ed", color = "#000000", shape = Mrecord, label = " {data = ded | {left_node = 00000000 | right_node = 00000000} | {node = 011BBCB8 | parent_node =  011BBB08}} "];
-   "011BBB80" -> "011BBC58" [dir = both, color = "#93c63a", penwidth = 1, label = "no"];
-   "011BBC58" [style = filled, fontcolor = "#000000", fillcolor = "#bce1ed", color = "#000000", shape = Mrecord, label = " {data = mama | {left_node = 00000000 | right_node = 00000000} | {node = 011BBC58 | parent_node =  011BBB80}} "];
+"00CD1670" -> "00CD16C8"  [style = invis, weight = 1000, rank = 1];
+"00CD1670" -> "00CD1720"  [style = invis, weight = 1000, rank = 2];
+node [shape = doubleoctagon, fontsize = 28, fontname = "Helvetica-Bold", style = "bold", style = filled, fontcolor = "#FFFF00", fillcolor = "#ff0000"]
+   "00CD1670" [style = filled, fontcolor = "#000000", fillcolor = "#bce1ed", color = "#000000", shape = Mrecord, label = " {data = Животное | {left_node = 00CD16C8 | right_node = 00CD1720} | {node = 00CD1670 | parent_node =  00000000}} "];
+   "00CD1670" -> "00CD1720" [dir = both, color = "#55c3dc", penwidth = 1, label = "yes"];
+   "00CD1720" [style = filled, fontcolor = "#000000", fillcolor = "#bce1ed", color = "#000000", shape = Mrecord, label = " {data = дед | {left_node = 00000000 | right_node = 00000000} | {node = 00CD1720 | parent_node =  00CD1670}} "];
+   "00CD1670" -> "00CD16C8" [dir = both, color = "#93c63a", penwidth = 1, label = "no"];
+   "00CD16C8" [style = filled, fontcolor = "#000000", fillcolor = "#bce1ed", color = "#000000", shape = Mrecord, label = " {data = мама | {left_node = 00000000 | right_node = 00000000} | {node = 00CD16C8 | parent_node =  00CD1670}} "];
 }

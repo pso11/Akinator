@@ -77,7 +77,7 @@ void fwrite_graph_dump(const struct tree_t* tree)
 
     size_t depth = 0;
     fprintf_invis_edges(graph_file, tree, tree -> tree_root, &depth);
-    fprintf(graph_file, "node [shape = doubleoctagon, fontsize = 28, fontname = \"Helvetica-Bold\", style = \"bold\", style = filled, fontcolor = \"#FFFF00\", fillcolor = \"#ff0000\"]");
+    fprintf(graph_file, "node [shape = doubleoctagon, fontsize = 28, fontname = \"Helvetica-Bold\", style = \"bold\", style = filled, fontcolor = \"#FFFF00\", fillcolor = \"#ff0000\"]\n");
     size_t visited_nodes = 0;
     fprintf_nodes(graph_file, &visited_nodes, tree -> tree_root);
 
@@ -198,7 +198,7 @@ void fprintf_node(FILE* file, struct tree_node_t* current_node, const char* labe
     fprintf(file,  "   \"%p\" [style = filled, fontcolor = \"%s\", fillcolor = \"%s\", color = \"%s\", shape = Mrecord, label = \" "
                         "{data = %" SPECIFICATOR " | {left_node = %p | right_node = %p} | {node = %p | parent_node =  %p}} \"];\n",
                         current_node, label_color, fill_color, stroke_color, current_node -> data, current_node -> left_node,
-                        current_node -> left_node, current_node, current_node -> parent_node);
+                        current_node -> right_node, current_node, current_node -> parent_node);
 }
 
 void fprintf_edge(FILE* file, struct tree_node_t* current_node, struct tree_node_t* linked_node,
@@ -214,13 +214,13 @@ void fprintf_invis_edges(FILE* file, const struct tree_t* tree, tree_node_t* cur
 
     if (current_node -> left_node)
     {
-        fprintf(file, "\"%p\" -> \"%p\"  [style = invis, weight = 1000, rank = %d];", current_node, current_node -> left_node, *depth);
+        fprintf(file, "\"%p\" -> \"%p\"  [style = invis, weight = 1000, rank = %d];\n", current_node, current_node -> left_node, *depth);
         fprintf_invis_edges(file, tree, current_node -> left_node, depth);
     }
 
     if (current_node -> right_node)
     {
-        fprintf(file, "\"%p\" -> \"%p\"  [style = invis, weight = 1000, rank = %d];", current_node, current_node -> right_node, *depth);
+        fprintf(file, "\"%p\" -> \"%p\"  [style = invis, weight = 1000, rank = %d];\n", current_node, current_node -> right_node, *depth);
         fprintf_invis_edges(file, tree, current_node -> right_node, depth);
     }
 

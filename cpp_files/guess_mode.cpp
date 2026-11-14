@@ -7,8 +7,6 @@
 #include "akinator.h"
 #include "guess_mode.h"
 
-#define MAX_NODE_LEN 50
-
 error_t guess_elem(struct tree_t* tree)
 {
     error_t error_status = OK;
@@ -41,12 +39,12 @@ error_t move_along_tree(struct tree_node_t** current_node)
 
     while (((*current_node) -> right_node != NULL) && ((*current_node) -> left_node != NULL))
     {
-        char answer[5] = {};
+        char answer[MAX_ANSWER_NAME] = {};
         printf("Это %" SPECIFICATOR "?\n" , (*current_node) -> data);
         scanf("%s", answer);
-        if (strcmp(answer, "yes") == 0)
+        if (strcmp(answer, "да") == 0)
             *current_node = (*current_node) -> right_node;
-        else if (strcmp(answer, "no") == 0)
+        else if (strcmp(answer, "нет") == 0)
             *current_node = (*current_node) -> left_node;
         else
             printf("Такого варианта ответа нет\n");
@@ -60,7 +58,7 @@ error_t check_if_guessed(struct tree_node_t* current_node, struct tree_t* tree)
     error_t error_status = OK;
 
     char answer[5] = {};
-    printf("Is it %" SPECIFICATOR "?\n", current_node -> data);
+    printf("Это %" SPECIFICATOR "?\n", current_node -> data);
     scanf("%s", answer);
     if (strcmp(answer, "да") == 0)
     {
@@ -73,14 +71,14 @@ error_t check_if_guessed(struct tree_node_t* current_node, struct tree_t* tree)
         current_node -> left_node = (tree_node_t*)calloc(1, sizeof(tree_node_t));
         if (current_node -> left_node == NULL)
         {
-            FILL_DBG(error_status);
+            FILL_DBG(NULL_POINT_FROM_CALLOC);
             return NULL_POINT_FROM_CALLOC;
         }
 
         (current_node -> left_node) -> data = (char*)calloc(MAX_NODE_LEN, sizeof(char));
         if ((current_node -> left_node) -> data == NULL)
         {
-            FILL_DBG(error_status);
+            FILL_DBG(NULL_POINT_FROM_CALLOC);
             return NULL_POINT_FROM_CALLOC;
         }
         (current_node -> left_node) -> parent_node = current_node;
@@ -88,13 +86,13 @@ error_t check_if_guessed(struct tree_node_t* current_node, struct tree_t* tree)
         current_node -> right_node = (tree_node_t*)calloc(1, sizeof(tree_node_t));
         if (current_node -> right_node == NULL)
         {
-            FILL_DBG(error_status);
+            FILL_DBG(NULL_POINT_FROM_CALLOC);
             return NULL_POINT_FROM_CALLOC;
         }
         (current_node -> right_node) -> data = (char*)calloc(MAX_NODE_LEN, sizeof(char));
         if ((current_node -> right_node) -> data == NULL)
         {
-            FILL_DBG(error_status);
+            FILL_DBG(NULL_POINT_FROM_CALLOC);
             return NULL_POINT_FROM_CALLOC;
         }
         (current_node -> right_node) -> parent_node = current_node;
@@ -108,5 +106,5 @@ error_t check_if_guessed(struct tree_node_t* current_node, struct tree_t* tree)
         scanf("\n%[^\n]", current_node -> data);
     }
 
-    return error_status;
+    return OK;
 }
