@@ -6,12 +6,7 @@
 #include "error_codes.h"
 #include "get_tree.h"
 #include "guess_mode.h"
-
-error_t (*mode_array[])(struct tree_t* tree) =
-{
-    &guess_elem,
-    &tree_dump
-};
+#include "functions_array.h"
 
 int main(const int argc, const char* argv[])
 {

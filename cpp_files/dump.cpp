@@ -26,7 +26,7 @@ error_t tree_veryficator(struct tree_t* tree)
         return WRONG_SIZE;
     }
 
-    size_t visited_nodes = 0;
+    int visited_nodes = 0;
     error_status = node_veryficator(tree -> tree_root, &visited_nodes, tree);
     if (error_status)
     {
@@ -154,7 +154,7 @@ void fprintf_tree_data(const struct tree_t* tree, FILE* file)
     fflush(file);
 }
 
-error_t node_veryficator(tree_node_t* current_node, size_t* visited_nodes, struct tree_t* tree)
+error_t node_veryficator(tree_node_t* current_node, int* visited_nodes, struct tree_t* tree)
 {
     error_t error_status = OK;
 
@@ -228,8 +228,6 @@ void fprintf_invis_edges(FILE* file, const struct tree_t* tree, tree_node_t* cur
 
 void fprintf_nodes(FILE* file, size_t* visited_nodes, tree_node_t* current_node)
 {
-    error_t error_status = OK;
-
     fprintf_node(file, current_node, "#000000", "#000000", "#bce1ed");
     (*visited_nodes)++;
 

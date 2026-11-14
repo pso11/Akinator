@@ -39,15 +39,16 @@ error_t move_along_tree(struct tree_node_t** current_node)
 
     while (((*current_node) -> right_node != NULL) && ((*current_node) -> left_node != NULL))
     {
-        char answer[MAX_ANSWER_NAME] = {};
-        printf("Это %" SPECIFICATOR "?\n" , (*current_node) -> data);
-        scanf("%s", answer);
+        char* answer = get_answer(*current_node);
+
         if (strcmp(answer, "да") == 0)
             *current_node = (*current_node) -> right_node;
         else if (strcmp(answer, "нет") == 0)
             *current_node = (*current_node) -> left_node;
         else
             printf("Такого варианта ответа нет\n");
+
+        free(answer);
     }
 
     return error_status;
@@ -57,54 +58,70 @@ error_t check_if_guessed(struct tree_node_t* current_node, struct tree_t* tree)
 {
     error_t error_status = OK;
 
-    char answer[5] = {};
-    printf("Это %" SPECIFICATOR "?\n", current_node -> data);
-    scanf("%s", answer);
-    if (strcmp(answer, "да") == 0)
+    char* answer = get_answer(current_node);
+
+    error_status = check_answer(answer, current_node, tree);
+    if (error_status)
     {
-        printf("Уафхфхфххф, я же говорил, что угадаю\n");
+        FILL_DBG(error_status);
         return error_status;
     }
+
+    free(answer);
+
+    return error_status;
+}
+
+char* get_answer(struct tree_node_t* current_node)
+{
+    char* answer = (char*)calloc(MAX_ANSWER_NAME, sizeof(char));
+    printf("Это %" SPECIFICATOR "?\n", current_node -> data);
+    scanf("%s", answer);
+
+    return answer;
+}
+ error_t check_answer(char* answer, struct tree_node_t* current_node, struct tree_t* tree)
+ {
+    error_t error_status = OK;
+
+    if (strcmp(answer, "да") == 0)
+        printf("Уафхфхфххф, я же говорил, что угадаю\n");
+
     else if (strcmp(answer, "нет") == 0)
     {
         tree -> tree_node_num += 2;
-        current_node -> left_node = (tree_node_t*)calloc(1, sizeof(tree_node_t));
-        if (current_node -> left_node == NULL)
-        {
-            FILL_DBG(NULL_POINT_FROM_CALLOC);
-            return NULL_POINT_FROM_CALLOC;
-        }
 
-        (current_node -> left_node) -> data = (char*)calloc(MAX_NODE_LEN, sizeof(char));
-        if ((current_node -> left_node) -> data == NULL)
-        {
-            FILL_DBG(NULL_POINT_FROM_CALLOC);
-            return NULL_POINT_FROM_CALLOC;
-        }
-        (current_node -> left_node) -> parent_node = current_node;
+        error_status = create_one_node(&(current_node -> left_node));
+        if (error_status)
+            return error_status;
 
-        current_node -> right_node = (tree_node_t*)calloc(1, sizeof(tree_node_t));
-        if (current_node -> right_node == NULL)
-        {
-            FILL_DBG(NULL_POINT_FROM_CALLOC);
-            return NULL_POINT_FROM_CALLOC;
-        }
-        (current_node -> right_node) -> data = (char*)calloc(MAX_NODE_LEN, sizeof(char));
-        if ((current_node -> right_node) -> data == NULL)
-        {
-            FILL_DBG(NULL_POINT_FROM_CALLOC);
-            return NULL_POINT_FROM_CALLOC;
-        }
-        (current_node -> right_node) -> parent_node = current_node;
+        error_status = create_one_node(&(current_node -> right_node));
+        if (error_status)
+            return error_status;
+
+        link_children(current_node);
 
         memcpy((current_node -> left_node) -> data, current_node -> data, MAX_NODE_LEN * sizeof(char));
 
-        printf("<Блиннн. Тогда что это было?: \n");
-        scanf("\n%[^\n]", (current_node -> right_node) -> data);
-
-        printf("Как %s отличается от %s?: \n", (current_node -> right_node) -> data, (current_node -> left_node) -> data);
-        scanf("\n%[^\n]", current_node -> data);
+        get_new_data(current_node);
     }
+    else
+        printf("Такого варианта ответа нет\n");
 
-    return OK;
+    return error_status;
+}
+
+void link_children(struct tree_node_t* current_node)
+{
+    (current_node -> left_node) -> parent_node = current_node;
+    (current_node -> right_node) -> parent_node = current_node;
+}
+
+void get_new_data(struct tree_node_t* current_node)
+{
+    printf("<Блиннн. Тогда что это было?: \n");
+    scanf("\n%[^\n]", (current_node -> right_node) -> data);
+
+    printf("Как %s отличается от %s?: \n", (current_node -> right_node) -> data, (current_node -> left_node) -> data);
+    scanf("\n%[^\n]", current_node -> data);
 }

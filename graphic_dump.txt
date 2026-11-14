@@ -1,11 +1,35 @@
 digraph tree
 {
-"00CD1670" -> "00CD16C8"  [style = invis, weight = 1000, rank = 1];
-"00CD1670" -> "00CD1720"  [style = invis, weight = 1000, rank = 2];
+"00C41B80" -> "00C41BD8"  [style = invis, weight = 1000, rank = 1];
+"00C41BD8" -> "00C41C30"  [style = invis, weight = 1000, rank = 2];
+"00C41BD8" -> "00C41C88"  [style = invis, weight = 1000, rank = 3];
+"00C41B80" -> "00C41CE0"  [style = invis, weight = 1000, rank = 4];
+"00C41CE0" -> "00C440C0"  [style = invis, weight = 1000, rank = 5];
+"00C440C0" -> "00C44118"  [style = invis, weight = 1000, rank = 6];
+"00C440C0" -> "00C44170"  [style = invis, weight = 1000, rank = 7];
+"00C44170" -> "00C441C8"  [style = invis, weight = 1000, rank = 8];
+"00C44170" -> "00C44220"  [style = invis, weight = 1000, rank = 9];
+"00C41CE0" -> "00C44278"  [style = invis, weight = 1000, rank = 10];
 node [shape = doubleoctagon, fontsize = 28, fontname = "Helvetica-Bold", style = "bold", style = filled, fontcolor = "#FFFF00", fillcolor = "#ff0000"]
-   "00CD1670" [style = filled, fontcolor = "#000000", fillcolor = "#bce1ed", color = "#000000", shape = Mrecord, label = " {data = Животное | {left_node = 00CD16C8 | right_node = 00CD1720} | {node = 00CD1670 | parent_node =  00000000}} "];
-   "00CD1670" -> "00CD1720" [dir = both, color = "#55c3dc", penwidth = 1, label = "yes"];
-   "00CD1720" [style = filled, fontcolor = "#000000", fillcolor = "#bce1ed", color = "#000000", shape = Mrecord, label = " {data = дед | {left_node = 00000000 | right_node = 00000000} | {node = 00CD1720 | parent_node =  00CD1670}} "];
-   "00CD1670" -> "00CD16C8" [dir = both, color = "#93c63a", penwidth = 1, label = "no"];
-   "00CD16C8" [style = filled, fontcolor = "#000000", fillcolor = "#bce1ed", color = "#000000", shape = Mrecord, label = " {data = мама | {left_node = 00000000 | right_node = 00000000} | {node = 00CD16C8 | parent_node =  00CD1670}} "];
+   "00C41B80" [style = filled, fontcolor = "#000000", fillcolor = "#bce1ed", color = "#000000", shape = Mrecord, label = " {data = учитель  | {left_node = 00C41BD8 | right_node = 00C41CE0} | {node = 00C41B80 | parent_node =  00000000}} "];
+   "00C41B80" -> "00C41CE0" [dir = both, color = "#55c3dc", penwidth = 1, label = "yes"];
+   "00C41CE0" [style = filled, fontcolor = "#000000", fillcolor = "#bce1ed", color = "#000000", shape = Mrecord, label = " {data = Ведёт матан  | {left_node = 00C440C0 | right_node = 00C44278} | {node = 00C41CE0 | parent_node =  00C41B80}} "];
+   "00C41CE0" -> "00C44278" [dir = both, color = "#55c3dc", penwidth = 1, label = "yes"];
+   "00C44278" [style = filled, fontcolor = "#000000", fillcolor = "#bce1ed", color = "#000000", shape = Mrecord, label = " {data = Шмидт  | {left_node = 00000000 | right_node = 00000000} | {node = 00C44278 | parent_node =  00C41CE0}} "];
+   "00C41CE0" -> "00C440C0" [dir = both, color = "#93c63a", penwidth = 1, label = "no"];
+   "00C440C0" [style = filled, fontcolor = "#000000", fillcolor = "#bce1ed", color = "#000000", shape = Mrecord, label = " {data = пердит | {left_node = 00C44118 | right_node = 00C44170} | {node = 00C440C0 | parent_node =  00C41CE0}} "];
+   "00C440C0" -> "00C44170" [dir = both, color = "#55c3dc", penwidth = 1, label = "yes"];
+   "00C44170" [style = filled, fontcolor = "#000000", fillcolor = "#bce1ed", color = "#000000", shape = Mrecord, label = " {data = ведёт физику | {left_node = 00C441C8 | right_node = 00C44220} | {node = 00C44170 | parent_node =  00C440C0}} "];
+   "00C44170" -> "00C44220" [dir = both, color = "#55c3dc", penwidth = 1, label = "yes"];
+   "00C44220" [style = filled, fontcolor = "#000000", fillcolor = "#bce1ed", color = "#000000", shape = Mrecord, label = " {data = алия таирова | {left_node = 00000000 | right_node = 00000000} | {node = 00C44220 | parent_node =  00C44170}} "];
+   "00C44170" -> "00C441C8" [dir = both, color = "#93c63a", penwidth = 1, label = "no"];
+   "00C441C8" [style = filled, fontcolor = "#000000", fillcolor = "#bce1ed", color = "#000000", shape = Mrecord, label = " {data = стукопин | {left_node = 00000000 | right_node = 00000000} | {node = 00C441C8 | parent_node =  00C44170}} "];
+   "00C440C0" -> "00C44118" [dir = both, color = "#93c63a", penwidth = 1, label = "no"];
+   "00C44118" [style = filled, fontcolor = "#000000", fillcolor = "#bce1ed", color = "#000000", shape = Mrecord, label = " {data = дед  | {left_node = 00000000 | right_node = 00000000} | {node = 00C44118 | parent_node =  00C440C0}} "];
+   "00C41B80" -> "00C41BD8" [dir = both, color = "#93c63a", penwidth = 1, label = "no"];
+   "00C41BD8" [style = filled, fontcolor = "#000000", fillcolor = "#bce1ed", color = "#000000", shape = Mrecord, label = " {data = старше  | {left_node = 00C41C30 | right_node = 00C41C88} | {node = 00C41BD8 | parent_node =  00C41B80}} "];
+   "00C41BD8" -> "00C41C88" [dir = both, color = "#55c3dc", penwidth = 1, label = "yes"];
+   "00C41C88" [style = filled, fontcolor = "#000000", fillcolor = "#bce1ed", color = "#000000", shape = Mrecord, label = " {data = бабушка | {left_node = 00000000 | right_node = 00000000} | {node = 00C41C88 | parent_node =  00C41BD8}} "];
+   "00C41BD8" -> "00C41C30" [dir = both, color = "#93c63a", penwidth = 1, label = "no"];
+   "00C41C30" [style = filled, fontcolor = "#000000", fillcolor = "#bce1ed", color = "#000000", shape = Mrecord, label = " {data = мама | {left_node = 00000000 | right_node = 00000000} | {node = 00C41C30 | parent_node =  00C41BD8}} "];
 }
