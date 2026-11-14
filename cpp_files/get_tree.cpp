@@ -6,6 +6,7 @@
 #include "error_codes.h"
 #include "get_tree.h"
 #include "akinator.h"
+#include "dump.h"
 
 error_t get_tree(const char* file_name, struct tree_t* tree)
 {

@@ -5,6 +5,7 @@
 #include "error_codes.h"
 #include "get_tree.h"
 #include "akinator.h"
+#include "dump.h"
 #include "guess_mode.h"
 
 error_t guess_elem(struct tree_t* tree)

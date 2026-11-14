@@ -5,6 +5,7 @@
 #include <io.h>
 
 #include "akinator.h"
+#include "dump.h"
 
 #ifdef TREE_DEBUG
 error_t tree_veryficator(struct tree_t* tree)

@@ -4,6 +4,7 @@
 
 #include "akinator.h"
 #include "error_codes.h"
+#include "dump.h"
 
 error_t tree_init(struct tree_t* tree)
 {
