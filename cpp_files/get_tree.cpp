@@ -3,14 +3,12 @@
 #include <string.h>
 #include <sys\stat.h>
 
-#include "error_codes.h"
 #include "get_tree.h"
 #include "akinator.h"
-#include "dump.h"
 
-error_t get_tree(const char* file_name, struct tree_t* tree)
+tree_error_t get_tree(const char* file_name, struct tree_t* tree)
 {
-    error_t error_status = OK;
+    tree_error_t error_status = OK;
 
     if (tree == NULL)
     {
@@ -75,9 +73,9 @@ size_t define_file_size(const char* file_name)
     return buff.st_size;
 }
 
-error_t fill_tree_structure(struct tree_node_t* current_node, struct tree_t* tree, const char* tree_buffer, size_t* buffer_position)
+tree_error_t fill_tree_structure(struct tree_node_t* current_node, struct tree_t* tree, const char* tree_buffer, size_t* buffer_position)
 {
-    error_t error_status = OK;
+    tree_error_t error_status = OK;
 
     while (tree_buffer[*buffer_position] == ' ')
         (*buffer_position)++;
@@ -122,9 +120,9 @@ error_t fill_tree_structure(struct tree_node_t* current_node, struct tree_t* tre
     return error_status;
 }
 
-error_t save_tree(const char* file_name, struct tree_t* tree)
+tree_error_t save_tree(const char* file_name, struct tree_t* tree)
 {
-    error_t error_status = OK;
+    tree_error_t error_status = OK;
 
     FILE* file = fopen(file_name, "w");
     if (file == NULL)
@@ -145,9 +143,9 @@ error_t save_tree(const char* file_name, struct tree_t* tree)
     return error_status;
 }
 
-error_t fprintf_tree(FILE* file, struct tree_node_t* current_node)
+tree_error_t fprintf_tree(FILE* file, struct tree_node_t* current_node)
 {
-    error_t error_status = OK;
+    tree_error_t error_status = OK;
 
     if (file == NULL)
         return NULL_FILE_POINT;
@@ -156,7 +154,7 @@ error_t fprintf_tree(FILE* file, struct tree_node_t* current_node)
         return NULL_NODE_GIVEN;
 
     fprintf(file, " (");
-    fprintf(file, "\"%" SPECIFICATOR "\" ", current_node -> data);
+    fprintf(file, "\"%" TREE_SPECIFICATOR "\" ", current_node -> data);
     if (current_node -> left_node)  fprintf_tree(file, current_node -> left_node);
     else fprintf(file, " nil");
     if (current_node -> right_node) fprintf_tree(file, current_node -> right_node);
@@ -166,9 +164,9 @@ error_t fprintf_tree(FILE* file, struct tree_node_t* current_node)
     return error_status;
 }
 
-error_t create_tree_root(struct tree_t* tree)
+tree_error_t create_tree_root(struct tree_t* tree)
 {
-    error_t error_status = OK;
+    tree_error_t error_status = OK;
 
     if (tree == NULL)
     {
@@ -223,7 +221,7 @@ int no_or_empty_file_created(const char* file_name)
     else return 0;
 }
 
-error_t create_one_node(struct tree_node_t** node_to_create)
+tree_error_t create_one_node(struct tree_node_t** node_to_create)
 {
     *node_to_create = (tree_node_t*)calloc(1, sizeof(tree_node_t));
     if (*node_to_create == NULL)

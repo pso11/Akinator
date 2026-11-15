@@ -1,6 +1,6 @@
 #pragma once
 
-enum error_t
+enum tree_error_t
 {
     OK                        = 0,
     NULL_POINT_FROM_CALLOC    = 1,
@@ -13,5 +13,6 @@ enum error_t
     WRONG_LEFT_PARENTNESS     = 8,
     DAMAGED_LEAF_NODE         = 9,
     TREE_WITH_CYCLE           = 10,
-    WRONG_ROOT_PARENT         = 11
+    WRONG_ROOT_PARENT         = 11,
+    DAMAGED_STACK_TREE        = 12
 };

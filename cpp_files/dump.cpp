@@ -5,12 +5,11 @@
 #include <io.h>
 
 #include "akinator.h"
-#include "dump.h"
 
 #ifdef TREE_DEBUG
-error_t tree_veryficator(struct tree_t* tree)
+tree_error_t tree_veryficator(struct tree_t* tree)
 {
-    error_t error_status = OK;
+    tree_error_t error_status = OK;
 
     if (tree == NULL)
         return NULL_POINT_ON_TREE_STRUCT;
@@ -38,7 +37,7 @@ error_t tree_veryficator(struct tree_t* tree)
     return OK;
 }
 
-error_t tree_dump(struct tree_t* tree)
+tree_error_t tree_dump(struct tree_t* tree)
 {
     printf("Hiiii!!!! LOOK AT MAIN.LOG!!!\n");
 
@@ -155,9 +154,9 @@ void fprintf_tree_data(const struct tree_t* tree, FILE* file)
     fflush(file);
 }
 
-error_t node_veryficator(tree_node_t* current_node, int* visited_nodes, struct tree_t* tree)
+tree_error_t node_veryficator(tree_node_t* current_node, int* visited_nodes, struct tree_t* tree)
 {
-    error_t error_status = OK;
+    tree_error_t error_status = OK;
 
     ++(*visited_nodes);
     if ((*visited_nodes) > (tree -> tree_node_num))
@@ -197,7 +196,7 @@ void fprintf_node(FILE* file, struct tree_node_t* current_node, const char* labe
                   const char* stroke_color, const char* fill_color)
 {
     fprintf(file,  "   \"%p\" [style = filled, fontcolor = \"%s\", fillcolor = \"%s\", color = \"%s\", shape = Mrecord, label = \" "
-                        "{data = %" SPECIFICATOR " | {left_node = %p | right_node = %p} | {node = %p | parent_node =  %p}} \"];\n",
+                        "{data = %" TREE_SPECIFICATOR " | {left_node = %p | right_node = %p} | {node = %p | parent_node =  %p}} \"];\n",
                         current_node, label_color, fill_color, stroke_color, current_node -> data, current_node -> left_node,
                         current_node -> right_node, current_node, current_node -> parent_node);
 }

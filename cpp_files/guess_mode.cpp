@@ -2,15 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "error_codes.h"
 #include "get_tree.h"
 #include "akinator.h"
-#include "dump.h"
 #include "guess_mode.h"
 
-error_t guess_elem(struct tree_t* tree)
+tree_error_t guess_elem(struct tree_t* tree)
 {
-    error_t error_status = OK;
+    tree_error_t error_status = OK;
 
     tree_node_t* current_node = tree -> tree_root;
 
@@ -31,9 +29,9 @@ error_t guess_elem(struct tree_t* tree)
     return error_status;
 }
 
-error_t move_along_tree(struct tree_node_t** current_node)
+tree_error_t move_along_tree(struct tree_node_t** current_node)
 {
-    error_t error_status = OK;
+    tree_error_t error_status = OK;
 
     if (current_node == NULL)
         return NULL_NODE_GIVEN;
@@ -55,9 +53,9 @@ error_t move_along_tree(struct tree_node_t** current_node)
     return error_status;
 }
 
-error_t check_if_guessed(struct tree_node_t* current_node, struct tree_t* tree)
+tree_error_t check_if_guessed(struct tree_node_t* current_node, struct tree_t* tree)
 {
-    error_t error_status = OK;
+    tree_error_t error_status = OK;
 
     char* answer = get_answer(current_node);
 
@@ -76,14 +74,14 @@ error_t check_if_guessed(struct tree_node_t* current_node, struct tree_t* tree)
 char* get_answer(struct tree_node_t* current_node)
 {
     char* answer = (char*)calloc(MAX_ANSWER_NAME, sizeof(char));
-    printf("Это %" SPECIFICATOR "?\n", current_node -> data);
+    printf("Это %" TREE_SPECIFICATOR "?\n", current_node -> data);
     scanf("%s", answer);
 
     return answer;
 }
- error_t check_answer(char* answer, struct tree_node_t* current_node, struct tree_t* tree)
+ tree_error_t check_answer(char* answer, struct tree_node_t* current_node, struct tree_t* tree)
  {
-    error_t error_status = OK;
+    tree_error_t error_status = OK;
 
     if (strcmp(answer, "да") == 0)
         printf("Уафхфхфххф, я же говорил, что угадаю\n");

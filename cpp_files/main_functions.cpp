@@ -3,12 +3,10 @@
 #include <string.h>
 
 #include "akinator.h"
-#include "error_codes.h"
-#include "dump.h"
 
-error_t tree_init(struct tree_t* tree)
+tree_error_t tree_init(struct tree_t* tree)
 {
-    error_t error_status = OK;
+    tree_error_t error_status = OK;
 
     if (tree == NULL)
     {
@@ -22,9 +20,9 @@ error_t tree_init(struct tree_t* tree)
     return error_status;
 }
 
-error_t tree_destroy(struct tree_t* tree, struct tree_node_t* current_node)
+tree_error_t tree_destroy(struct tree_t* tree, struct tree_node_t* current_node)
 {
-    error_t error_status = OK;
+    tree_error_t error_status = OK;
 
     if (tree == NULL)
     {
@@ -67,7 +65,7 @@ size_t ask_user_mode(void)
 {
     printf("Привет, я Сири. Выберите режим работы программы   \n"
            "(1). Отгадывание              (2). Показать дерево\n"
-           "(3). Выйти                                        \n");
+           "(3). Определение              (4). Выйти          \n");
 
     size_t chosen_mode = 0;
     scanf("%d", &chosen_mode);
