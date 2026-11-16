@@ -1,3 +1,6 @@
+#define TX_USE_SPEAK
+#include <TXLib.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -11,33 +14,21 @@ tree_error_t define_elem(struct tree_t* tree)
     tree_error_t  tree_error_status  = OK;
     stack_error_t stack_error_status = STACK_OK;
 
-    printf("Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÑÐµÐ¼Ð¾Ðµ ÑÐ»Ð¾Ð²Ð¾: ");
-    char data[MAX_NODE_LEN] = {};
-    scanf("%" TREE_SPECIFICATOR, data);
-
     tree_node_t* def_elem = NULL;
-    tree_error_status = find_tree_elem(data, &def_elem, tree -> tree_root);
+    tree_error_status = get_tree_elem(&def_elem, tree);
     if (tree_error_status)
     {
         FILL_DBG(tree_error_status);
         return tree_error_status;
     }
-
     if (def_elem == NULL)
     {
-        printf("Ð¢Ð°ÐºÐ¾Ð³Ð¾ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð° Ð½Ðµ ÑÑƒÑ‰ÐµÑÑ‚Ð²ÑƒÐµÑ‚ \n");
+        txSpeak("\vÒàêîãî ýëåìåíòà íå ñóùåñòâóåò \n");
         return tree_error_status;
     }
 
     struct stack_t stk = {};
-    stack_error_status = stack_init(&stk, 10);
-    if (stack_error_status)
-    {
-        FILL_DBG(stack_error_status);
-        return DAMAGED_STACK_TREE;
-    }
-
-    stack_error_status = fill_stack(&stk, def_elem);
+    stack_error_status = stack_init_and_fill(def_elem, &stk);
     if (stack_error_status)
     {
         FILL_DBG(stack_error_status);
@@ -102,19 +93,46 @@ stack_error_t write_stack(struct stack_t* stk, struct tree_node_t* def_elem)
 {
     stack_error_t error_status = STACK_OK;
 
-    printf("%" TREE_SPECIFICATOR " ", def_elem -> data);
-
     tree_node_t* poped_value = 0;
+    txSpeak("\v%" TREE_SPECIFICATOR " ", def_elem -> data);
     while (stk -> size != 0)
     {
         error_status = stack_pop(stk, &poped_value);
 
         if (poped_value == NULL)
-            printf("Ð½Ðµ ");
+            txSpeak("\víå ");
         else
-            printf("%" TREE_SPECIFICATOR " ", poped_value -> data);
+            txSpeak("\v%" TREE_SPECIFICATOR " ", poped_value -> data);
     }
     putchar('\n');
 
     return error_status;
+}
+
+tree_error_t get_tree_elem(struct tree_node_t** def_elem, struct tree_t* tree)
+{
+    tree_error_t tree_error_status = OK;
+
+    txSpeak("\vÂâåäèòå îïðåäåëÿåìîå ñëîâî: ");
+    char data[MAX_NODE_LEN] = {};
+    scanf("\n%[^\n]" TREE_SPECIFICATOR, data);
+
+    tree_error_status = find_tree_elem(data, def_elem, tree -> tree_root);
+
+    return tree_error_status;
+}
+
+stack_error_t stack_init_and_fill(struct tree_node_t* def_elem, struct stack_t* stk)
+{
+    stack_error_t stack_error_status = STACK_OK;
+
+    stack_error_status = stack_init(stk, 10);
+    if (stack_error_status)
+        return stack_error_status;
+
+    stack_error_status = fill_stack(stk, def_elem);
+    if (stack_error_status)
+        return stack_error_status;
+
+    return stack_error_status;
 }

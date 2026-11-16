@@ -1,3 +1,6 @@
+#define TX_USE_SPEAK
+#include <TXLib.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -40,12 +43,12 @@ tree_error_t move_along_tree(struct tree_node_t** current_node)
     {
         char* answer = get_answer(*current_node);
 
-        if (strcmp(answer, "РґР°") == 0)
+        if (strcmp(answer, "да") == 0)
             *current_node = (*current_node) -> right_node;
-        else if (strcmp(answer, "РЅРµС‚") == 0)
+        else if (strcmp(answer, "нет") == 0)
             *current_node = (*current_node) -> left_node;
         else
-            printf("РўР°РєРѕРіРѕ РІР°СЂРёР°РЅС‚Р° РѕС‚РІРµС‚Р° РЅРµС‚\n");
+            txSpeak("\vТакого варианта ответа нет\n");
 
         free(answer);
     }
@@ -74,7 +77,7 @@ tree_error_t check_if_guessed(struct tree_node_t* current_node, struct tree_t* t
 char* get_answer(struct tree_node_t* current_node)
 {
     char* answer = (char*)calloc(MAX_ANSWER_NAME, sizeof(char));
-    printf("Р­С‚Рѕ %" TREE_SPECIFICATOR "?\n", current_node -> data);
+    txSpeak("\vЭто %" TREE_SPECIFICATOR "?\n", current_node -> data);
     scanf("%s", answer);
 
     return answer;
@@ -83,10 +86,10 @@ char* get_answer(struct tree_node_t* current_node)
  {
     tree_error_t error_status = OK;
 
-    if (strcmp(answer, "РґР°") == 0)
-        printf("РЈР°С„С…С„С…С„С…С…С„, СЏ Р¶Рµ РіРѕРІРѕСЂРёР», С‡С‚Рѕ СѓРіР°РґР°СЋ\n");
+    if (strcmp(answer, "да") == 0)
+        txSpeak("\vУафхфхфххф, я же говорил, что угадаю\n");
 
-    else if (strcmp(answer, "РЅРµС‚") == 0)
+    else if (strcmp(answer, "нет") == 0)
     {
         tree -> tree_node_num += 2;
 
@@ -105,7 +108,7 @@ char* get_answer(struct tree_node_t* current_node)
         get_new_data(current_node);
     }
     else
-        printf("РўР°РєРѕРіРѕ РІР°СЂРёР°РЅС‚Р° РѕС‚РІРµС‚Р° РЅРµС‚\n");
+        txSpeak("\vТакого варианта ответа нет\n");
 
     return error_status;
 }
@@ -118,9 +121,9 @@ void link_children(struct tree_node_t* current_node)
 
 void get_new_data(struct tree_node_t* current_node)
 {
-    printf("<Р‘Р»РёРЅРЅРЅ. РўРѕРіРґР° С‡С‚Рѕ СЌС‚Рѕ Р±С‹Р»Рѕ?: \n");
+    txSpeak("\v<Блиннн. Тогда что это было?: \n");
     scanf("\n%[^\n]", (current_node -> right_node) -> data);
 
-    printf("РљР°Рє %s РѕС‚Р»РёС‡Р°РµС‚СЃСЏ РѕС‚ %s?: \n", (current_node -> right_node) -> data, (current_node -> left_node) -> data);
+    txSpeak("\vКак %s отличается от %s?: \n", (current_node -> right_node) -> data, (current_node -> left_node) -> data);
     scanf("\n%[^\n]", current_node -> data);
 }

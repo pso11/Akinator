@@ -1,6 +1,10 @@
+#define TX_USE_SPEAK
+#include <TXLib.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <windows.h>
 
 #include "akinator.h"
 
@@ -63,12 +67,13 @@ tree_error_t tree_destroy(struct tree_t* tree, struct tree_node_t* current_node)
 
 size_t ask_user_mode(void)
 {
-    printf("РџСЂРёРІРµС‚, СЏ РЎРёСЂРё. Р’С‹Р±РµСЂРёС‚Рµ СЂРµР¶РёРј СЂР°Р±РѕС‚С‹ РїСЂРѕРіСЂР°РјРјС‹   \n"
-           "(1). РћС‚РіР°РґС‹РІР°РЅРёРµ              (2). РџРѕРєР°Р·Р°С‚СЊ РґРµСЂРµРІРѕ\n"
-           "(3). РћРїСЂРµРґРµР»РµРЅРёРµ              (4). Р’С‹Р№С‚Рё          \n");
+    txSpeak("\vПривет, я Сири. Выберите режим работы программы  \n");
+    printf("(1). Отгадывание              (2). Показать дерево\n"
+           "(3). Определение              (4). Сравнение      \n"
+           "(5). Выйти\n");
 
     size_t chosen_mode = 0;
-    scanf("%d", &chosen_mode);
+    scanf("%zu", &chosen_mode);
 
     return chosen_mode;
 }

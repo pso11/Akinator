@@ -3,15 +3,17 @@
 #include <windows.h>
 
 #include "akinator.h"
+#include "show_tree.h"
 #include "get_tree.h"
 #include "guess_mode.h"
 #include "define_mode.h"
+#include "compare_mode.h"
 #include "functions_array.h"
 
 int main(const int argc, const char* argv[])
 {
-    SetConsoleCP(65001);
-    SetConsoleOutputCP(65001);
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
 
     tree_error_t error_status = OK;
     struct tree_t tree = {};
@@ -21,7 +23,7 @@ int main(const int argc, const char* argv[])
     ASSERT(tree, error_status);
 
     size_t chosen_mode = 0;
-    while ((chosen_mode = ask_user_mode()) != 4)
+    while ((chosen_mode = ask_user_mode()) != 5)
     {
         error_status = get_tree(argv[1], &tree);
         ASSERT(tree, error_status);

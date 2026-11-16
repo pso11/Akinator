@@ -1,10 +1,10 @@
 #ifdef TREE_USE_INT
     typedef int tree_elem_t;
     #define TREE_SPECIFICATOR "d"
-#elif TREE_USE_DOUBLE
+#elif defined(TREE_USE_DOUBLE)
     typedef double tree_elem_t;
     #define TREE_SPECIFICATOR "lg"
-#elif TREE_USE_CHAR
+#elif defined(TREE_USE_CHAR)
     typedef char* tree_elem_t;
     #define TREE_SPECIFICATOR "s"
 #else
@@ -44,23 +44,13 @@ struct tree_t
 #ifdef TREE_DEBUG
     tree_error_t tree_dump(struct tree_t* tree);
     void fwrite_txt_dump(const struct tree_t* tree, FILE* file);
-    void fwrite_graph_dump(const struct tree_t* tree);
     void fwrite_html_dump(const struct tree_t* tree, FILE* file);
-    void define_log_file(struct tree_t* tree);
-    size_t define_run_number(const char* file_name);
     void fwrite_stars(size_t number, FILE* file);
-    void fprintf_invis_edges(FILE* file, const struct tree_t* tree, tree_node_t* current_node, size_t* depth);
-    void fprintf_nodes(FILE* file, size_t* visited_nodes, tree_node_t* current_node);
     void fprintf_beautiful(FILE* file_name, const char* string);
     void fprintf_error_inf(const struct tree_t* tree, FILE* file);
     void fprintf_tree_data(const struct tree_t* tree, FILE* file);
     tree_error_t node_veryficator(tree_node_t* current_node, int* visited_nodes, struct tree_t* tree);
     tree_error_t tree_veryficator(struct tree_t* tree);
-    void fprintf_edge(FILE* file, struct tree_node_t* current_node, struct tree_node_t* linked_node,
-                      const char* line_status, const char* edge_color, double penwidth, const char* label);
-    void fprintf_node(FILE* file, struct tree_node_t* current_node, const char* label_color,
-                      const char* stroke_color, const char* fill_color);
-
 
     #define FILL_DBG(error)                \
         tree -> line       = __LINE__ ;    \

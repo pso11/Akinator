@@ -1,3 +1,6 @@
+#define TX_USE_SPEAK
+#include <TXLib.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -20,7 +23,7 @@ tree_error_t get_tree(const char* file_name, struct tree_t* tree)
     {
         FILE* file = fopen(file_name, "w+");
         fclose(file);
-        printf("Ð’Ð°ÑˆÐ° Ð±Ð°Ð·Ð° Ð´Ð°Ð½Ð½Ñ‹Ñ… Ð¿ÑƒÑÑ‚Ð°.\n");
+        txSpeak("\vÂàøà áàçà äàííûõ ïóñòà.\n");
         error_status = create_tree_root(tree);
         if (error_status)
         {
@@ -80,7 +83,7 @@ tree_error_t fill_tree_structure(struct tree_node_t* current_node, struct tree_t
     while (tree_buffer[*buffer_position] == ' ')
         (*buffer_position)++;
 
-    size_t temp_increment = 0;
+    int temp_increment = 0;
     if (tree_buffer[*buffer_position] == '(')
     {
         tree_node_t* node_pointer = 0;
@@ -199,13 +202,13 @@ tree_error_t create_tree_root(struct tree_t* tree)
     ((tree -> tree_root) -> right_node) -> parent_node = tree -> tree_root;
     tree -> tree_node_num +=
 
-    printf("Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð³Ð»Ð°Ð²Ð½ÑƒÑŽ Ñ…Ð°Ñ€Ð°ÐºÑ‚ÐµÑ€Ð¸ÑÑ‚Ð¸ÐºÑƒ: ");
+    txSpeak("\vÂâåäèòå ãëàâíóþ õàðàêòåðèñòèêó: ");
     scanf("\n%[^\n]", ((tree -> tree_root) -> data));
 
-    printf("Ð¢ÐµÐ¿ÐµÑ€ÑŒ Ð²Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¾Ñ‚Ð²ÐµÑ‚, ÐµÑÐ»Ð¸ Ð´Ð°: ");
+    txSpeak("\vÒåïåðü ââåäèòå îòâåò, åñëè äà: ");
     scanf("\n%[^\n]", (((tree -> tree_root) -> right_node)-> data));
 
-    printf("Ð˜ Ð²Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¾Ñ‚Ð²ÐµÑ‚, ÐµÑÐ»Ð¸ Ð½ÐµÑ‚: ");
+    txSpeak("\vÈ ââåäèòå îòâåò, åñëè íåò: ");
     scanf("\n%[^\n]", (((tree -> tree_root) -> left_node)-> data));
 
     return error_status;
