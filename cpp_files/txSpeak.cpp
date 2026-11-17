@@ -63,7 +63,7 @@ int txSpeak_no_answer_to_answer(void)
     return 0;
 }
 
-int txSpeak_yes_or_no(struct tree_node_t* current_node)
+int txSpeak_yes_or_no(tree_node_t* current_node)
 {
     txSpeak("\vİòî %" TREE_SPECIFICATOR "?\n", current_node -> data);
 

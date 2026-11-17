@@ -10,7 +10,7 @@
 #include "akinator.h"
 #include "my_txSpeak.h"
 
-tree_error_t get_tree(const char* file_name, struct tree_t* tree)
+tree_error_t get_tree(const char* file_name, tree_t* tree)
 {
     tree_error_t error_status = OK;
 
@@ -77,7 +77,7 @@ size_t define_file_size(const char* file_name)
     return buff.st_size;
 }
 
-tree_error_t fill_tree_structure(struct tree_node_t* current_node, struct tree_t* tree, const char* tree_buffer, size_t* buffer_position)
+tree_error_t fill_tree_structure(tree_node_t* current_node, tree_t* tree, const char* tree_buffer, size_t* buffer_position)
 {
     tree_error_t error_status = OK;
 
@@ -124,7 +124,7 @@ tree_error_t fill_tree_structure(struct tree_node_t* current_node, struct tree_t
     return error_status;
 }
 
-tree_error_t save_tree(const char* file_name, struct tree_t* tree)
+tree_error_t save_tree(const char* file_name, tree_t* tree)
 {
     tree_error_t error_status = OK;
 
@@ -147,7 +147,7 @@ tree_error_t save_tree(const char* file_name, struct tree_t* tree)
     return error_status;
 }
 
-tree_error_t fprintf_tree(FILE* file, struct tree_node_t* current_node)
+tree_error_t fprintf_tree(FILE* file, tree_node_t* current_node)
 {
     tree_error_t error_status = OK;
 
@@ -168,7 +168,7 @@ tree_error_t fprintf_tree(FILE* file, struct tree_node_t* current_node)
     return error_status;
 }
 
-tree_error_t create_tree_root(struct tree_t* tree)
+tree_error_t create_tree_root(tree_t* tree)
 {
     tree_error_t error_status = OK;
 
@@ -225,7 +225,7 @@ int no_or_empty_file_created(const char* file_name)
     else return 0;
 }
 
-tree_error_t create_one_node(struct tree_node_t** node_to_create)
+tree_error_t create_one_node(tree_node_t** node_to_create)
 {
     *node_to_create = (tree_node_t*)calloc(1, sizeof(tree_node_t));
     if (*node_to_create == NULL)
@@ -238,7 +238,7 @@ tree_error_t create_one_node(struct tree_node_t** node_to_create)
     return OK;
 }
 
-void link_nodes(struct tree_t* tree, struct tree_node_t* node_pointer, struct tree_node_t* current_node)
+void link_nodes(tree_t* tree, tree_node_t* node_pointer, tree_node_t* current_node)
 {
     if (tree -> tree_root == NULL)
     {

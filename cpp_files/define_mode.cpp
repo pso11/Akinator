@@ -10,7 +10,7 @@
 #include "get_tree.h"
 #include "my_txSpeak.h"
 
-tree_error_t define_elem(struct tree_t* tree)
+tree_error_t define_elem(tree_t* tree)
 {
     tree_error_t  tree_error_status  = OK;
     stack_error_t stack_error_status = STACK_OK;
@@ -28,7 +28,7 @@ tree_error_t define_elem(struct tree_t* tree)
         return tree_error_status;
     }
 
-    struct stack_t stk = {};
+    stack_t stk = {};
     stack_error_status = stack_init_and_fill(def_elem, &stk);
     if (stack_error_status)
     {
@@ -46,7 +46,7 @@ tree_error_t define_elem(struct tree_t* tree)
     return tree_error_status;
 }
 
-tree_error_t find_tree_elem(tree_elem_t data, struct tree_node_t** def_elem, struct tree_node_t* current_node)
+tree_error_t find_tree_elem(tree_elem_t data, tree_node_t** def_elem, tree_node_t* current_node)
 {
     tree_error_t error_status = OK;
 
@@ -68,7 +68,7 @@ tree_error_t find_tree_elem(tree_elem_t data, struct tree_node_t** def_elem, str
     return error_status;
 }
 
-stack_error_t fill_stack(struct stack_t* stk, struct tree_node_t* def_elem)
+stack_error_t fill_stack(stack_t* stk, tree_node_t* def_elem)
 {
     stack_error_t error_status = STACK_OK;
 
@@ -90,7 +90,7 @@ stack_error_t fill_stack(struct stack_t* stk, struct tree_node_t* def_elem)
     return error_status;
 }
 
-stack_error_t write_stack(struct stack_t* stk, struct tree_node_t* def_elem)
+stack_error_t write_stack(stack_t* stk, tree_node_t* def_elem)
 {
     stack_error_t error_status = STACK_OK;
 
@@ -110,7 +110,7 @@ stack_error_t write_stack(struct stack_t* stk, struct tree_node_t* def_elem)
     return error_status;
 }
 
-tree_error_t get_tree_elem(struct tree_node_t** def_elem, struct tree_t* tree)
+tree_error_t get_tree_elem(tree_node_t** def_elem, tree_t* tree)
 {
     tree_error_t tree_error_status = OK;
 
@@ -123,7 +123,7 @@ tree_error_t get_tree_elem(struct tree_node_t** def_elem, struct tree_t* tree)
     return tree_error_status;
 }
 
-stack_error_t stack_init_and_fill(struct tree_node_t* def_elem, struct stack_t* stk)
+stack_error_t stack_init_and_fill(tree_node_t* def_elem, stack_t* stk)
 {
     stack_error_t stack_error_status = STACK_OK;
 

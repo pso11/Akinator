@@ -9,7 +9,7 @@
 #include "akinator.h"
 #include "my_txSpeak.h"
 
-tree_error_t tree_init(struct tree_t* tree)
+tree_error_t tree_init(tree_t* tree)
 {
     tree_error_t error_status = OK;
 
@@ -25,7 +25,7 @@ tree_error_t tree_init(struct tree_t* tree)
     return error_status;
 }
 
-tree_error_t tree_destroy(struct tree_t* tree, struct tree_node_t* current_node)
+tree_error_t tree_destroy(tree_t* tree, tree_node_t* current_node)
 {
     tree_error_t error_status = OK;
 

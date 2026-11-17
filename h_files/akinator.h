@@ -42,15 +42,15 @@ struct tree_t
 };
 
 #ifdef TREE_DEBUG
-    tree_error_t tree_dump(struct tree_t* tree);
-    void fwrite_txt_dump(const struct tree_t* tree, FILE* file);
-    void fwrite_html_dump(const struct tree_t* tree, FILE* file);
+    tree_error_t tree_dump(tree_t* tree);
+    void fwrite_txt_dump(const tree_t* tree, FILE* file);
+    void fwrite_html_dump(const tree_t* tree, FILE* file);
     void fwrite_stars(size_t number, FILE* file);
     void fprintf_beautiful(FILE* file_name, const char* string);
-    void fprintf_error_inf(const struct tree_t* tree, FILE* file);
-    void fprintf_tree_data(const struct tree_t* tree, FILE* file);
-    tree_error_t node_veryficator(tree_node_t* current_node, int* visited_nodes, struct tree_t* tree);
-    tree_error_t tree_veryficator(struct tree_t* tree);
+    void fprintf_error_inf(const tree_t* tree, FILE* file);
+    void fprintf_tree_data(const tree_t* tree, FILE* file);
+    tree_error_t node_veryficator(tree_node_t* current_node, int* visited_nodes, tree_t* tree);
+    tree_error_t tree_veryficator(tree_t* tree);
 
     #define FILL_DBG(error)                \
         tree -> line       = __LINE__ ;    \
@@ -91,7 +91,7 @@ struct tree_t
 #define MAX_PATH_LEN 100
 #define MAX_ANSWER_NAME 25
 
-tree_error_t tree_init(struct tree_t* tree);
-tree_error_t tree_destroy(struct tree_t* tree, struct tree_node_t* current_node);
+tree_error_t tree_init(tree_t* tree);
+tree_error_t tree_destroy(tree_t* tree, tree_node_t* current_node);
 size_t ask_user_mode(void);
 

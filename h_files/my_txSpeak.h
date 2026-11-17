@@ -6,7 +6,7 @@ int txSpeak_negativ_answer(void);
 int txSpeak_apologize(void);
 int txSpeak_ask_differences(tree_elem_t val1, tree_elem_t val2);
 int txSpeak_no_answer_to_answer(void);
-int txSpeak_yes_or_no(struct tree_node_t* current_node);
+int txSpeak_yes_or_no(tree_node_t* current_node);
 int txSpeak_shure_answer(void);
 int txSpeak_dump_message(void);
 int txSpeak_no_tree_elem(void);

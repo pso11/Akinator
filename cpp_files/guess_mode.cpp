@@ -10,7 +10,7 @@
 #include "guess_mode.h"
 #include "my_txSpeak.h"
 
-tree_error_t guess_elem(struct tree_t* tree)
+tree_error_t guess_elem(tree_t* tree)
 {
     tree_error_t error_status = OK;
 
@@ -33,7 +33,7 @@ tree_error_t guess_elem(struct tree_t* tree)
     return error_status;
 }
 
-tree_error_t move_along_tree(struct tree_node_t** current_node)
+tree_error_t move_along_tree(tree_node_t** current_node)
 {
     tree_error_t error_status = OK;
 
@@ -57,7 +57,7 @@ tree_error_t move_along_tree(struct tree_node_t** current_node)
     return error_status;
 }
 
-tree_error_t check_if_guessed(struct tree_node_t* current_node, struct tree_t* tree)
+tree_error_t check_if_guessed(tree_node_t* current_node, tree_t* tree)
 {
     tree_error_t error_status = OK;
 
@@ -75,7 +75,7 @@ tree_error_t check_if_guessed(struct tree_node_t* current_node, struct tree_t* t
     return error_status;
 }
 
-char* get_answer(struct tree_node_t* current_node)
+char* get_answer(tree_node_t* current_node)
 {
     char* answer = (char*)calloc(MAX_ANSWER_NAME, sizeof(char));
     txSpeak_yes_or_no(current_node);
@@ -83,7 +83,7 @@ char* get_answer(struct tree_node_t* current_node)
 
     return answer;
 }
- tree_error_t check_answer(char* answer, struct tree_node_t* current_node, struct tree_t* tree)
+ tree_error_t check_answer(char* answer, tree_node_t* current_node, tree_t* tree)
  {
     tree_error_t error_status = OK;
 
@@ -114,13 +114,13 @@ char* get_answer(struct tree_node_t* current_node)
     return error_status;
 }
 
-void link_children(struct tree_node_t* current_node)
+void link_children(tree_node_t* current_node)
 {
     (current_node -> left_node) -> parent_node = current_node;
     (current_node -> right_node) -> parent_node = current_node;
 }
 
-void get_new_data(struct tree_node_t* current_node)
+void get_new_data(tree_node_t* current_node)
 {
     txSpeak_apologize();
     scanf("\n%[^\n]", (current_node -> right_node) -> data);

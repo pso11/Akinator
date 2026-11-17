@@ -12,7 +12,7 @@
 #include "my_txSpeak.h"
 
 #ifdef TREE_DEBUG
-tree_error_t tree_veryficator(struct tree_t* tree)
+tree_error_t tree_veryficator(tree_t* tree)
 {
     tree_error_t error_status = OK;
 
@@ -42,7 +42,7 @@ tree_error_t tree_veryficator(struct tree_t* tree)
     return OK;
 }
 
-tree_error_t tree_dump(struct tree_t* tree)
+tree_error_t tree_dump(tree_t* tree)
 {
     txSpeak_dump_message();
 
@@ -63,7 +63,7 @@ void fwrite_stars(size_t number, FILE* file)
         fputc('*', file);
 }
 
-void fwrite_txt_dump(const struct tree_t* tree, FILE* file)
+void fwrite_txt_dump(const tree_t* tree, FILE* file)
 {
     fprintf_beautiful(file, "\nMEET ERROR IN YOUR PROGRAMM READ ALL INFORMATION DOWN\n");
 
@@ -74,7 +74,7 @@ void fwrite_txt_dump(const struct tree_t* tree, FILE* file)
     fputc('\n', file);
 }
 
-void fwrite_html_dump(const struct tree_t* tree, FILE* file)
+void fwrite_html_dump(const tree_t* tree, FILE* file)
 {
     fprintf(file, "<!DOCTYPE html>\n<html>\n<pre style = \"font-size: 20px;\">\n");
 
@@ -102,7 +102,7 @@ void fprintf_beautiful(FILE* file, const char* string)
     fputc('\n', file);
 }
 
-void fprintf_error_inf(const struct tree_t* tree, FILE* file)
+void fprintf_error_inf(const tree_t* tree, FILE* file)
 {
     const char* error_description_array[] =
     {
@@ -128,7 +128,7 @@ void fprintf_error_inf(const struct tree_t* tree, FILE* file)
     fflush(file);
 }
 
-void fprintf_tree_data(const struct tree_t* tree, FILE* file)
+void fprintf_tree_data(const tree_t* tree, FILE* file)
 {
     fprintf(file, "YOUR tree: tree_t %s = [%p] created by %s():\n"
                   "root_pointer = %p\n"
@@ -139,7 +139,7 @@ void fprintf_tree_data(const struct tree_t* tree, FILE* file)
     fflush(file);
 }
 
-tree_error_t node_veryficator(tree_node_t* current_node, int* visited_nodes, struct tree_t* tree)
+tree_error_t node_veryficator(tree_node_t* current_node, int* visited_nodes, tree_t* tree)
 {
     tree_error_t error_status = OK;
 

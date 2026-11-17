@@ -6,7 +6,7 @@
 #include "show_tree.h"
 #include "get_tree.h"
 
-tree_error_t show_tree(struct tree_t* tree)
+tree_error_t show_tree(tree_t* tree)
 {
     tree_error_t error_status = OK;
     fwrite_graph_dump(tree);
@@ -15,7 +15,7 @@ tree_error_t show_tree(struct tree_t* tree)
     return error_status;
 }
 
-void fwrite_graph_dump(const struct tree_t* tree)
+void fwrite_graph_dump(const tree_t* tree)
 {
     FILE* graph_file = fopen("graphic_dump.txt", "w");
 
@@ -36,7 +36,7 @@ void fwrite_graph_dump(const struct tree_t* tree)
     system(dot_cmd);
 }
 
-void fprintf_node(FILE* file, struct tree_node_t* current_node, const char* label_color,
+void fprintf_node(FILE* file, tree_node_t* current_node, const char* label_color,
                   const char* stroke_color, const char* fill_color)
 {
     char* translit_data = turn_to_translit(current_node -> data);
@@ -49,14 +49,14 @@ void fprintf_node(FILE* file, struct tree_node_t* current_node, const char* labe
     free(translit_data);
 }
 
-void fprintf_edge(FILE* file, struct tree_node_t* current_node, struct tree_node_t* linked_node,
+void fprintf_edge(FILE* file, tree_node_t* current_node, tree_node_t* linked_node,
                   const char* line_status, const char* edge_color, double penwidth, const char* label)
 {
     fprintf(file,  "   \"%p\" -> \"%p\" [%s, color = \"%s\", penwidth = %lg, label = \"%s\"];\n",
                     current_node, linked_node, line_status, edge_color, penwidth, label);
 }
 
-void fprintf_invis_edges(FILE* file, const struct tree_t* tree, tree_node_t* current_node, size_t* depth)
+void fprintf_invis_edges(FILE* file, const tree_t* tree, tree_node_t* current_node, size_t* depth)
 {
     (*depth)++;
 

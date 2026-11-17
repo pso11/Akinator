@@ -11,7 +11,7 @@
 #include "get_tree.h"
 #include "my_txSpeak.h"
 
-tree_error_t compare_elements(struct tree_t* tree)
+tree_error_t compare_elements(tree_t* tree)
 {
     tree_error_t  tree_error_status  = OK;
     stack_error_t stack_error_status = STACK_OK;
@@ -43,8 +43,8 @@ tree_error_t compare_elements(struct tree_t* tree)
         return tree_error_status;
     }
 
-    struct stack_t stk1 = {};
-    struct stack_t stk2 = {};
+    stack_t stk1 = {};
+    stack_t stk2 = {};
     stack_error_status = stack_init_and_fill(def_elem_1, &stk1);
     if (stack_error_status)
     {
@@ -69,8 +69,8 @@ tree_error_t compare_elements(struct tree_t* tree)
     return tree_error_status;
 }
 
-stack_error_t write_compare_stack_inf(struct tree_node_t* def_elem_1, struct tree_node_t* def_elem_2,
-                                      struct stack_t* stk2, struct stack_t* stk1)
+stack_error_t write_compare_stack_inf(tree_node_t* def_elem_1, tree_node_t* def_elem_2,
+                                      stack_t* stk2, stack_t* stk1)
 {
     stack_error_t error_status = STACK_OK;
 
@@ -95,9 +95,9 @@ stack_error_t write_compare_stack_inf(struct tree_node_t* def_elem_1, struct tre
     return error_status;
 }
 
-stack_error_t write_same_inf(struct tree_node_t** poped_value_1, struct tree_node_t** poped_value_2,
-                             struct tree_node_t* def_elem_1, struct tree_node_t* def_elem_2,
-                             struct stack_t* stk2, struct stack_t* stk1)
+stack_error_t write_same_inf(tree_node_t** poped_value_1, tree_node_t** poped_value_2,
+                             tree_node_t* def_elem_1, tree_node_t* def_elem_2,
+                             stack_t* stk2, stack_t* stk1)
 {
     stack_error_t error_status = STACK_OK;
 
@@ -126,7 +126,7 @@ stack_error_t write_same_inf(struct tree_node_t** poped_value_1, struct tree_nod
     return error_status;
 }
 
-stack_error_t write_dif_inf(struct tree_node_t* poped_value, struct tree_node_t* def_elem, struct stack_t* stk)
+stack_error_t write_dif_inf(tree_node_t* poped_value, tree_node_t* def_elem, stack_t* stk)
 {
     stack_error_t error_status = STACK_OK;
 

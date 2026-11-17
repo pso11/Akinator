@@ -16,7 +16,7 @@ int main(const int argc, const char* argv[])
     SetConsoleOutputCP(1251);
 
     tree_error_t error_status = OK;
-    struct tree_t tree = {};
+    tree_t tree = {};
     DUMP_INIT(tree);
 
     error_status = tree_init(&tree);
