@@ -351,7 +351,7 @@ END OF OUR MESSAGE
 
 ### EXAMPLE OF HTML LOG
 
-![alt text](image-1.png)
+![alt text](image-3.png)
 
 ### **Hall of Fame**
 
