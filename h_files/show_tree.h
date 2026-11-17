@@ -1,7 +1,7 @@
 #include "error_codes.h"
 
 void fwrite_graph_dump(const tree_t* tree);
-void fprintf_nodes(FILE* file, size_t* visited_nodes, tree_node_t* current_node);
+void fprintf_nodes(FILE* file, size_t* visited_nodes, tree_node_t* current_node, const char* fill_color);
 void fprintf_edge(FILE* file, tree_node_t* current_node, tree_node_t* linked_node,
                       const char* line_status, const char* edge_color, double penwidth, const char* label);
 void fprintf_node(FILE* file, tree_node_t* current_node, const char* label_color,

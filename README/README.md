@@ -143,7 +143,7 @@ If he doesn't guess, you suggest him to add the object in question.
 > To show image of graphviz picture Windows will automatically find the application associated with the   .png extension and launch it.
 
 **Example of show tree mode**
-![alt text](image.png)
+![alt text](image-2.png)
 
 > [!IMPORTANT]
 > Since our program uses txSpeak — which will be discussed further on — all files are encoded in 1251. This encoding is compatible with TXlib, but not with Graphviz. Therefore, we write the content for the Graphviz file using transliteration.

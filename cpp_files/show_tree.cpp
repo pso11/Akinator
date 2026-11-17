@@ -25,7 +25,7 @@ void fwrite_graph_dump(const tree_t* tree)
     fprintf_invis_edges(graph_file, tree, tree -> tree_root, &depth);
     fprintf(graph_file, "node [shape = doubleoctagon, fontsize = 28, fontname = \"Helvetica-Bold\", style = \"bold\", style = filled, fontcolor = \"#FFFF00\", fillcolor = \"#ff0000\"]\n");
     size_t visited_nodes = 0;
-    fprintf_nodes(graph_file, &visited_nodes, tree -> tree_root);
+    fprintf_nodes(graph_file, &visited_nodes, tree -> tree_root, "#c890f6");
 
     fprintf(graph_file, "}\n");
     fclose(graph_file);
@@ -74,21 +74,21 @@ void fprintf_invis_edges(FILE* file, const tree_t* tree, tree_node_t* current_no
 
 }
 
-void fprintf_nodes(FILE* file, size_t* visited_nodes, tree_node_t* current_node)
+void fprintf_nodes(FILE* file, size_t* visited_nodes, tree_node_t* current_node, const char* fill_color)
 {
-    fprintf_node(file, current_node, "#000000", "#000000", "#bce1ed");
+    fprintf_node(file, current_node, "#000000", "#000000", fill_color);
     (*visited_nodes)++;
 
     if (current_node -> right_node)
     {
         fprintf_edge(file, current_node, current_node -> right_node, "dir = both", "#55c3dc", 1.0, "yes");
-        fprintf_nodes(file, visited_nodes, current_node -> right_node);
+        fprintf_nodes(file, visited_nodes, current_node -> right_node, "#93d7e6");
     }
 
     if (current_node -> left_node)
     {
         fprintf_edge(file, current_node, current_node -> left_node, "dir = both", "#93c63a", 1.0, "no");
-        fprintf_nodes(file, visited_nodes, current_node -> left_node);
+        fprintf_nodes(file, visited_nodes, current_node -> left_node, "#ccee91");
     }
 
     fflush(file);
