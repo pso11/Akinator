@@ -8,6 +8,7 @@
 #include "akinator.h"
 #include "define_mode.h"
 #include "get_tree.h"
+#include "my_txSpeak.h"
 
 tree_error_t define_elem(struct tree_t* tree)
 {
@@ -23,7 +24,7 @@ tree_error_t define_elem(struct tree_t* tree)
     }
     if (def_elem == NULL)
     {
-        txSpeak("\vТакого элемента не существует \n");
+        txSpeak_no_tree_elem();
         return tree_error_status;
     }
 
@@ -94,15 +95,15 @@ stack_error_t write_stack(struct stack_t* stk, struct tree_node_t* def_elem)
     stack_error_t error_status = STACK_OK;
 
     tree_node_t* poped_value = 0;
-    txSpeak("\v%" TREE_SPECIFICATOR " ", def_elem -> data);
+    txSpeak_poped_val(def_elem -> data);
     while (stk -> size != 0)
     {
         error_status = stack_pop(stk, &poped_value);
 
         if (poped_value == NULL)
-            txSpeak("\vне ");
+            txSpeak_no();
         else
-            txSpeak("\v%" TREE_SPECIFICATOR " ", poped_value -> data);
+            txSpeak_poped_val(poped_value -> data);
     }
     putchar('\n');
 
@@ -113,7 +114,7 @@ tree_error_t get_tree_elem(struct tree_node_t** def_elem, struct tree_t* tree)
 {
     tree_error_t tree_error_status = OK;
 
-    txSpeak("\vВведите определяемое слово: ");
+    txSpeak_enter_word();
     char data[MAX_NODE_LEN] = {};
     scanf("\n%[^\n]" TREE_SPECIFICATOR, data);
 

@@ -8,6 +8,7 @@
 
 #include "get_tree.h"
 #include "akinator.h"
+#include "my_txSpeak.h"
 
 tree_error_t get_tree(const char* file_name, struct tree_t* tree)
 {
@@ -23,7 +24,7 @@ tree_error_t get_tree(const char* file_name, struct tree_t* tree)
     {
         FILE* file = fopen(file_name, "w+");
         fclose(file);
-        txSpeak("\vВаша база данных пуста.\n");
+        txSpeak_empty_database();
         error_status = create_tree_root(tree);
         if (error_status)
         {
@@ -202,13 +203,13 @@ tree_error_t create_tree_root(struct tree_t* tree)
     ((tree -> tree_root) -> right_node) -> parent_node = tree -> tree_root;
     tree -> tree_node_num +=
 
-    txSpeak("\vВведите главную характеристику: ");
+    txSpeak_main_charact();
     scanf("\n%[^\n]", ((tree -> tree_root) -> data));
 
-    txSpeak("\vТеперь введите ответ, если да: ");
+    txSpeak_pros_answer();
     scanf("\n%[^\n]", (((tree -> tree_root) -> right_node)-> data));
 
-    txSpeak("\vИ введите ответ, если нет: ");
+    txSpeak_negativ_answer();
     scanf("\n%[^\n]", (((tree -> tree_root) -> left_node)-> data));
 
     return error_status;

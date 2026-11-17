@@ -9,6 +9,7 @@
 
 #include "akinator.h"
 #include "show_tree.h"
+#include "my_txSpeak.h"
 
 #ifdef TREE_DEBUG
 tree_error_t tree_veryficator(struct tree_t* tree)
@@ -43,7 +44,7 @@ tree_error_t tree_veryficator(struct tree_t* tree)
 
 tree_error_t tree_dump(struct tree_t* tree)
 {
-    txSpeak("\vHiiii!!!! LOOK AT MAIN.LOG!!!\n");
+    txSpeak_dump_message();
 
     FILE* file = fopen("main.log", "a+");
     fwrite_txt_dump(tree, file);

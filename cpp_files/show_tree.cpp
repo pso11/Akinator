@@ -94,7 +94,7 @@ void fprintf_nodes(FILE* file, size_t* visited_nodes, tree_node_t* current_node)
     fflush(file);
 }
 
-const char* get_translit_letter(const unsigned char letter)
+const char* get_translit_letter(const char letter)
 {
     switch (letter)
     {

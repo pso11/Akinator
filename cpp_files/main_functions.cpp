@@ -7,6 +7,7 @@
 #include <windows.h>
 
 #include "akinator.h"
+#include "my_txSpeak.h"
 
 tree_error_t tree_init(struct tree_t* tree)
 {
@@ -67,7 +68,7 @@ tree_error_t tree_destroy(struct tree_t* tree, struct tree_node_t* current_node)
 
 size_t ask_user_mode(void)
 {
-    txSpeak("\vПривет, я Сири. Выберите режим работы программы  \n");
+    txSpeak_introduction();
     printf("(1). Отгадывание              (2). Показать дерево\n"
            "(3). Определение              (4). Сравнение      \n"
            "(5). Выйти\n");

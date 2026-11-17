@@ -8,6 +8,7 @@
 #include "get_tree.h"
 #include "akinator.h"
 #include "guess_mode.h"
+#include "my_txSpeak.h"
 
 tree_error_t guess_elem(struct tree_t* tree)
 {
@@ -48,7 +49,7 @@ tree_error_t move_along_tree(struct tree_node_t** current_node)
         else if (strcmp(answer, "нет") == 0)
             *current_node = (*current_node) -> left_node;
         else
-            txSpeak("\vТакого варианта ответа нет\n");
+            txSpeak_no_answer_to_answer();
 
         free(answer);
     }
@@ -77,7 +78,7 @@ tree_error_t check_if_guessed(struct tree_node_t* current_node, struct tree_t* t
 char* get_answer(struct tree_node_t* current_node)
 {
     char* answer = (char*)calloc(MAX_ANSWER_NAME, sizeof(char));
-    txSpeak("\vЭто %" TREE_SPECIFICATOR "?\n", current_node -> data);
+    txSpeak_yes_or_no(current_node);
     scanf("%s", answer);
 
     return answer;
@@ -87,7 +88,7 @@ char* get_answer(struct tree_node_t* current_node)
     tree_error_t error_status = OK;
 
     if (strcmp(answer, "да") == 0)
-        txSpeak("\vУафхфхфххф, я же говорил, что угадаю\n");
+        txSpeak_shure_answer();
 
     else if (strcmp(answer, "нет") == 0)
     {
@@ -108,7 +109,7 @@ char* get_answer(struct tree_node_t* current_node)
         get_new_data(current_node);
     }
     else
-        txSpeak("\vТакого варианта ответа нет\n");
+        txSpeak_no_answer_to_answer();
 
     return error_status;
 }
@@ -121,9 +122,9 @@ void link_children(struct tree_node_t* current_node)
 
 void get_new_data(struct tree_node_t* current_node)
 {
-    txSpeak("\v<Блиннн. Тогда что это было?: \n");
+    txSpeak_apologize();
     scanf("\n%[^\n]", (current_node -> right_node) -> data);
 
-    txSpeak("\vКак %s отличается от %s?: \n", (current_node -> right_node) -> data, (current_node -> left_node) -> data);
+    txSpeak_ask_differences((current_node -> right_node) -> data, (current_node -> left_node) -> data);
     scanf("\n%[^\n]", current_node -> data);
 }

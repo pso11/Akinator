@@ -1,0 +1,17 @@
+int txSpeak_introduction(void);
+int txSpeak_empty_database(void);
+int txSpeak_main_charact(void);
+int txSpeak_pros_answer(void);
+int txSpeak_negativ_answer(void);
+int txSpeak_apologize(void);
+int txSpeak_ask_differences(tree_elem_t val1, tree_elem_t val2);
+int txSpeak_no_answer_to_answer(void);
+int txSpeak_yes_or_no(struct tree_node_t* current_node);
+int txSpeak_shure_answer(void);
+int txSpeak_dump_message(void);
+int txSpeak_no_tree_elem(void);
+int txSpeak_same_intro(tree_elem_t val1, tree_elem_t val2);
+int txSpeak_no(void);
+int txSpeak_poped_val(tree_elem_t val);
+int txSpeak_no_same_elem(void);
+int txSpeak_enter_word(void);
