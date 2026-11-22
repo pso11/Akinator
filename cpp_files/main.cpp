@@ -9,6 +9,7 @@
 #include "define_mode.h"
 #include "compare_mode.h"
 #include "functions_array.h"
+#include "my_txSpeak.h"
 
 int main(const int argc, const char* argv[])
 {
@@ -38,5 +39,6 @@ int main(const int argc, const char* argv[])
         ASSERT(tree, error_status);
 
     }
+
     return 0;
 }

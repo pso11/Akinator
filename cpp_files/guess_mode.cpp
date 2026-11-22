@@ -42,16 +42,12 @@ tree_error_t move_along_tree(tree_node_t** current_node)
 
     while (((*current_node) -> right_node != NULL) && ((*current_node) -> left_node != NULL))
     {
-        char* answer = get_answer(*current_node);
+        int answer = tx_get_answer(*current_node);
 
-        if (strcmp(answer, "да") == 0)
+        if (answer == 1)
             *current_node = (*current_node) -> right_node;
-        else if (strcmp(answer, "нет") == 0)
+        else if (answer == 2)
             *current_node = (*current_node) -> left_node;
-        else
-            txSpeak_no_answer_to_answer();
-
-        free(answer);
     }
 
     return error_status;
@@ -61,55 +57,33 @@ tree_error_t check_if_guessed(tree_node_t* current_node, tree_t* tree)
 {
     tree_error_t error_status = OK;
 
-    char* answer = get_answer(current_node);
-
-    error_status = check_answer(answer, current_node, tree);
-    if (error_status)
-    {
-        FILL_DBG(error_status);
-        return error_status;
-    }
-
-    free(answer);
-
-    return error_status;
-}
-
-char* get_answer(tree_node_t* current_node)
-{
-    char* answer = (char*)calloc(MAX_ANSWER_NAME, sizeof(char));
-    txSpeak_yes_or_no(current_node);
-    scanf("%s", answer);
-
-    return answer;
-}
- tree_error_t check_answer(char* answer, tree_node_t* current_node, tree_t* tree)
- {
-    tree_error_t error_status = OK;
-
-    if (strcmp(answer, "да") == 0)
+    int answer = tx_get_answer(current_node);
+    if (answer == 1)
         txSpeak_shure_answer();
 
-    else if (strcmp(answer, "нет") == 0)
+    else if (answer == 2)
     {
         tree -> tree_node_num += 2;
 
         error_status = create_one_node(&(current_node -> left_node));
         if (error_status)
+        {
+            FILL_DBG(error_status);
             return error_status;
+        }
 
         error_status = create_one_node(&(current_node -> right_node));
         if (error_status)
+        {
+            FILL_DBG(error_status);
             return error_status;
+        }
 
         link_children(current_node);
 
         memcpy((current_node -> left_node) -> data, current_node -> data, MAX_NODE_LEN * sizeof(char));
-
         get_new_data(current_node);
     }
-    else
-        txSpeak_no_answer_to_answer();
 
     return error_status;
 }
@@ -122,9 +96,11 @@ void link_children(tree_node_t* current_node)
 
 void get_new_data(tree_node_t* current_node)
 {
+    _txConsole = -1;
+
     txSpeak_apologize();
-    scanf("\n%[^\n]", (current_node -> right_node) -> data);
+    strcpy((current_node -> right_node) -> data, txInputBox());
 
     txSpeak_ask_differences((current_node -> right_node) -> data, (current_node -> left_node) -> data);
-    scanf("\n%[^\n]", current_node -> data);
+    strcpy(current_node -> data, txInputBox());
 }

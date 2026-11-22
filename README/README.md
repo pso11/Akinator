@@ -15,7 +15,7 @@
 3. TREE_USE_CHAR
 
 > [!NOTE]
-> This program doesn't have memory arena. To create new node calloc is used each time.
+> This program doesn't use memory arena. To create new node calloc is used each time.
 
 > [!TIP]
 > There is no difference between each mode yet, so we use calloc each time to create data for node.

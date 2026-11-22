@@ -68,15 +68,7 @@ tree_error_t tree_destroy(tree_t* tree, tree_node_t* current_node)
 
 size_t ask_user_mode(void)
 {
-    txSpeak_introduction();
-    printf("(1). Отгадывание              (2). Показать дерево\n"
-           "(3). Определение              (4). Сравнение      \n"
-           "(5). Выйти\n");
-
-    size_t chosen_mode = 0;
-    scanf("%zu", &chosen_mode);
-
-    return chosen_mode;
+    return tx_introduction();
 }
 
 
